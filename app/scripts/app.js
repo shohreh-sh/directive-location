@@ -17,7 +17,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ui.select'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -35,3 +36,18 @@ angular
         redirectTo: '/'
       });
   });
+
+
+/**
+ * @ngdoc bootstrap
+ * @name locationDirectiveApp
+ *
+ */
+(function () {
+
+  if (!angular.mock) {
+    angular.element(document).ready(function () {
+      angular.bootstrap(document, ['locationDirectiveApp']);
+    });
+  }
+})();

@@ -1,17 +1,24 @@
+(function(angular){
 'use strict';
 
-/**
- * @ngdoc function
- * @name locationDirectiveApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the locationDirectiveApp
- */
-angular.module('locationDirectiveApp')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+ angular
+   .module('locationDirectiveApp').controller('MainCtrl', ['$http', mainCtrl]);
+
+  function mainCtrl ($http) {
+
+   var vm = this;
+
+   vm.states = [];
+   getStates();
+
+
+
+    function getStates (){
+
+   $http.get('/api/states').then(function(response){
+   vm.states = response.data;
+   console.log(vm.states);
+   });
+   };
+
+  }})(window.angular);

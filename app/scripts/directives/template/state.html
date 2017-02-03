@@ -1,0 +1,9 @@
+<div >
+<ui-select name="state" ng-model="locationCtrl.state"
+           on-select="locationCtrl.changeState($item)">
+  <ui-select-match allow-clear="true">{{locationCtrl.stateName}}</ui-select-match>
+  <ui-select-choices repeat="state in locationCtrl.states | NoSpaceSearch: $select.search">
+    <span ng-bind-html="state.name"></span>
+  </ui-select-choices>
+</ui-select>
+</div>

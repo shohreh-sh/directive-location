@@ -89,6 +89,10 @@ module.exports = function (grunt) {
                 '/app/styles',
                 connect.static('./app/styles')
               ),
+              connect().use(
+                '/mock',
+                connect.static('./test/mock')
+              ),
               connect.static(appConfig.app)
             ];
           }
@@ -118,6 +122,22 @@ module.exports = function (grunt) {
       }
     },
 
+
+processhtml: {
+  options: {
+    commentMarker: 'process'
+  },
+  dist: {
+    files: [
+      {
+        expand: true,
+        cwd: '<%= yeoman.dist %>',
+        src: ['*.html', 'views/{,*/}*.html'],
+        dest: '<%= yeoman.dist %>'
+      }
+    ]
+  }
+},
     // Make sure there are no obvious mistakes
     jshint: {
       options: {
@@ -224,7 +244,7 @@ module.exports = function (grunt) {
         src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         ignorePath: /(\.\.\/){1,2}bower_components\//
       }
-    }, 
+    },
 
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {
@@ -504,7 +524,8 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'processhtml'
   ]);
 
   grunt.registerTask('default', [
